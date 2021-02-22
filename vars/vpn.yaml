@@ -1,8 +1,8 @@
 vpn_ipsec_preshared_key: "SomeSharedKey"
 vpn_server_password: "SomeServerPassword"
-vpn_users:
-  - name: "vpnadmin"
-    password: "P@ssw0rd"
-    groups: [vpn_groups]
+# vpn_users:
+#   - name: "vpnadmin"
+#     password: "P@ssw0rd"
+#     groups: [vpn_groups]
 vpn_protocols:
   - l2tp_ipsec
