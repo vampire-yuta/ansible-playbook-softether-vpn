@@ -7,6 +7,10 @@
       - gcc
       - "@Development Tools"
       - unzip
+      - vim
+      - net-tools
+      - bind-utils
+      - bash-completion
 
 - name: Create sources root directory
   file:
@@ -47,8 +51,8 @@
   systemd:
     daemon_reload: yes
 
-- name: Configure vpnserver
-  include: ../configure/tasks/main.yaml
+# - name: Configure vpnserver
+#   include: ../configure/tasks/main.yaml
 
 - name: Enable SystemD service on boot
   service:

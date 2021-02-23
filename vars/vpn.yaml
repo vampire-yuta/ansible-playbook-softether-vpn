@@ -1,8 +1,23 @@
 vpn_ipsec_preshared_key: "SomeSharedKey"
+
 vpn_server_password: "SomeServerPassword"
-# vpn_users:
-#   - name: "vpnadmin"
-#     password: "P@ssw0rd"
-#     groups: [vpn_groups]
+
+vpn_users:
+  - name: user1
+    password: password
+    groups: [group1]
+  - name: user2
+    password: password
+    groups: [group1]
+  - name: user3
+    password: password
+    groups: [group2]
+  - name: user4
+    password: password
+    groups: [group2]
+
+vpn_groups: "{{ vpn_users | map(attribute='groups') | sum(start=[]) | unique }}"
+
 vpn_protocols:
   - l2tp_ipsec
+  - manage
