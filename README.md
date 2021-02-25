@@ -48,3 +48,14 @@ ansible-playbook main.yaml -u root
 - `Softether VPN サーバー管理マネージャー（管理ツールのみ）を選択`
 - `新しい接続`を選択
   - ポートは`5555`
+
+## オプション
+### テスト用コンテナ起動
+```
+make centos7-up
+```
+
+### テスト用コンテナ停止
+```
+make centos7-rm
+```

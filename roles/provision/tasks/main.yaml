@@ -26,6 +26,9 @@
   when: selinux.reboot_required
 
 # yum
+- name: yum update
+  yum: name=* state=latest
+
 - name: Install required packages
   yum:
     name:
