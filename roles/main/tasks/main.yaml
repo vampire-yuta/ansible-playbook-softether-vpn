@@ -1,17 +1,3 @@
-- name: Install required packages
-  yum:
-    name:
-      - openssl-devel
-      - readline-devel
-      - ncurses-devel
-      - gcc
-      - "@Development Tools"
-      - unzip
-      - vim
-      - net-tools
-      - bind-utils
-      - bash-completion
-
 - name: Create sources root directory
   file:
     path: "{{ vpn_src_root_path }}"
@@ -50,9 +36,6 @@
 - name: Update SystemD service
   systemd:
     daemon_reload: yes
-
-# - name: Configure vpnserver
-#   include: ../configure/tasks/main.yaml
 
 - name: Enable SystemD service on boot
   service:

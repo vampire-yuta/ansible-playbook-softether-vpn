@@ -1,22 +1,3 @@
-vpn_protocols:
-  - l2tp_ipsec
-
-vpn_ports:
-  tcp:
-    openvpn:
-      - 443
-    softether:
-      - 992
-    manage:
-      - 443
-      - 5555
-  udp:
-    openvpn:
-      - 1194
-    l2tp_ipsec:
-      - 500
-      - 4500
-
 vpn_users:
   - name: user
     password: password
@@ -27,19 +8,6 @@ vpn_groups: "{{ vpn_users | map(attribute='groups') | sum(start=[]) | unique }}"
 vpn_server_password: server_password
 
 vpn_ipsec_preshared_key: vpn_ipsec_preshared_key
-
-vpn_tcp_ports: |
-  {{ (vpn_protocols | intersect(vpn_ports['tcp'].keys())) | map('extract', vpn_ports['tcp']) | list | sum(start=[]) }}
-vpn_udp_ports: |
-  {{ (vpn_protocols | intersect(vpn_ports['udp'].keys())) | map('extract', vpn_ports['udp']) | list | sum(start=[]) }}
-
-vpn_version: 4.34-9745-beta
-
-vpn_src_root_path: /usr/local/src
-
-vpn_src_path: "{{ vpn_src_root_path }}/SoftEtherVPN_Stable-{{ vpn_version }}"
-
-vpn_root: "/usr/vpnserver"
 
 vpn_vpncmd: "/usr/bin/vpncmd localhost /server /csv"
 

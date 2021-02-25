@@ -24,4 +24,3 @@
 - name: Set passwords
   command: "{{ vpn_vpncmd }} /hub:{{ vpn_hub.name }} /cmd UserPasswordSet {{ item.name }} /password:{{ item.password }}"
   with_items: "{{ vpn_users }}"
-

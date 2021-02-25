@@ -1,0 +1,41 @@
+# SELinux
+- name: (1) SELinux用のPythonモジュールをインストール
+  yum: name=libselinux-python state=installed
+
+- name: (2) SELinuxの無効化
+  selinux: state=disabled
+  register: selinux
+
+- name: (3) SSHのポート番号の取得
+  set_fact:
+    ssh_port: "{{ hostvars[inventory_hostname].ansible_port if 'ansible_port' in hostvars[inventory_hostname] else 22 }}"
+  when: selinux.reboot_required
+
+- name: (4) マシンのリブート
+  shell: "sleep 2 && reboot"
+  async: 1
+  poll: 0
+  when: selinux.reboot_required
+
+- name: (5) マシンの停止を待ち合わせ
+  local_action: wait_for host={{ inventory_hostname }} port={{ ssh_port }} state=stopped
+  when: selinux.reboot_required
+
+- name: (6) マシンの起動を待ち合わせ
+  local_action: wait_for host={{ inventory_hostname }} port={{ ssh_port }} state=started
+  when: selinux.reboot_required
+
+# yum
+- name: Install required packages
+  yum:
+    name:
+      - openssl-devel
+      - readline-devel
+      - ncurses-devel
+      - gcc
+      - "@Development Tools"
+      - unzip
+      - vim
+      - net-tools
+      - bind-utils
+      - bash-completion

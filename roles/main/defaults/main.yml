@@ -17,17 +17,6 @@ vpn_ports:
       - 500
       - 4500
 
-vpn_users:
-  - name: user
-    password: password
-    groups: [users]
-
-vpn_groups: "{{ vpn_users | map(attribute='groups') | sum(start=[]) | unique }}"
-
-vpn_server_password: server_password
-
-vpn_ipsec_preshared_key: vpn_ipsec_preshared_key
-
 vpn_tcp_ports: |
   {{ (vpn_protocols | intersect(vpn_ports['tcp'].keys())) | map('extract', vpn_ports['tcp']) | list | sum(start=[]) }}
 vpn_udp_ports: |
@@ -40,18 +29,3 @@ vpn_src_root_path: /usr/local/src
 vpn_src_path: "{{ vpn_src_root_path }}/SoftEtherVPN_Stable-{{ vpn_version }}"
 
 vpn_root: "/usr/vpnserver"
-
-vpn_vpncmd: "/usr/bin/vpncmd localhost /server /csv"
-
-vpn_hub:
-  name: default
-  ip: 10.10.10.1
-  mask: 255.255.255.0
-  dhcp:
-    start: 10.10.10.200
-    end: 10.10.10.250
-    mask: 255.255.255.0
-    expire: 7200 # seconds
-    gateway: 10.10.10.1
-    dns: 10.10.10.1
-    dns2: none
