@@ -22,7 +22,7 @@ vpn_tcp_ports: |
 vpn_udp_ports: |
   {{ (vpn_protocols | intersect(vpn_ports['udp'].keys())) | map('extract', vpn_ports['udp']) | list | sum(start=[]) }}
 
-vpn_version: 4.34-9745-beta
+vpn_version: 4.34-9744
 
 vpn_src_root_path: /usr/local/src
 

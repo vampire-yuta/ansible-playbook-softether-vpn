@@ -5,9 +5,9 @@
 
 - name: Download and unpack source archive
   unarchive:
-    src: "https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/archive/v{{ vpn_version }}.zip"
+    src: "SoftEtherVPN_Stable-{{vpn_version }}-unlocked-region-limits.tar.gz"
     dest: "{{ vpn_src_root_path }}"
-    remote_src: true
+    remote_src: false
     creates: "{{ vpn_src_path }}/configure"
 
 - name: Configure, make and install binaries
