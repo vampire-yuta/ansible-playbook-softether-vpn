@@ -6,7 +6,8 @@ centos7-rm:
 	docker rm -f $(shell docker ps -qa --filter ancestor=centos7-ssh:latest)
 
 centos7-copy-id:
-	ssh-copy-id root@localhost -p 20022
+	ssh-keygen -f "/home/yuta/.ssh/known_hosts" -R "[127.0.0.1]:20022"
+	ssh-copy-id root@127.0.0.1 -p 20022
 
 centos7-ansible-exec:
 	ansible-playbook main.yaml -u root -vvv
