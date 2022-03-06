@@ -10,4 +10,4 @@ centos7-copy-id:
 	ssh-copy-id root@127.0.0.1 -p 20022
 
 centos7-ansible-exec:
-	ansible-playbook main.yaml -u root -vvv
+	ansible-playbook main.yaml -i inventory.ini -u root -vvv
